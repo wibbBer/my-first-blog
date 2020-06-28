@@ -1,25 +1,13 @@
-<html>
-    <head>
-        <title> Ber's Blog </title>
-    </head>
-    <body>
-        <h1> This is a heading </h1>
-        <h2> This is a sub-heading </h2>
-        <h3> This is a sub-sub-heading </h3>
+{% extends 'blog/base.html' %}
 
-        {% for post in posts %}
-            <div>
-            <p> This is a paragraph </p>
-            <p> This is another paragraph with <em> emphasis </em> while this one <strong> strongly emphasize </strong> the text </p>
-            <br> </div>
-            <p> published: {{ post.published_date }}</p>
-            <h2> <a href="">{{ post.title }}</a></h2>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
             <p>{{ post.text|linebreaksbr }}</p>
-        {% endfor %}
-        
-        
-        <a href="https://www.instagram.com/wherewas_i/?hl=en">This is a link to my Public Instagram</a>
-        <ul><li> first item </li><li> second item </li></ul> makes a list like this one!
-        
-    </body>
-</html>
+        </div>
+    {% endfor %}
+{% endblock %}
